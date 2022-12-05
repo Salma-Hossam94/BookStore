@@ -1,7 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { setTimeout } from "timers";
 import Book from "../DataModels/Book";
 import store from "../store/store";
 import SearchBooks from "../components/SearchBooks";
@@ -86,19 +85,19 @@ describe("interact with search", () => {
     const searchinput =  screen.getByPlaceholderText("Search by title, author, or ISBN");
     fireEvent.change(searchinput, { target : {value : 'search'}})
     const booksResult = await screen.findAllByTestId("books");
-    setTimeout(() => {
+    await waitFor(() => {
       expect(booksResult.length).toBe(4);
-    }, 5000);
+    });
   })
 
   it("empty result books when search input value deleted", async () => {
     render(<MockedSearchBooks></MockedSearchBooks>);
     const searchinput =  screen.getByPlaceholderText("Search by title, author, or ISBN");
     fireEvent.change(searchinput, { target : {value : ''}})
-    setTimeout(() => {
+    await waitFor(() => {
       const booksResult = screen.queryAllByTestId("books");
       expect(booksResult.length).toBe(0);
-    }, 5000);
+    });
   })
 
   // it("contains no books at the beginning", async () => {

@@ -1,7 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { setTimeout } from "timers";
 import Book from "../DataModels/Book";
 import store from "../store/store";
 import BookListing from "../components/BookListing";
@@ -116,14 +115,16 @@ describe("distributing books in shelfs correctly", () => {
 
 describe("interacting with changing shelfs", () => {
     global.fetch = jest.fn().mockResolvedValue({json: async () => {return {books:customBooks}}});
-    it("add to the new shelf", async ()=> {
+        it("add to the new shelf", async ()=> {
         render(<MockedBookListing></MockedBookListing>);
         const bookSelectMenu = await screen.findByTestId("select-option-mock book 4");
         fireEvent.change(bookSelectMenu, {target:{ value:"wantToRead"}});
         
         const shelf = await screen.findByTestId("shelfbooks-wantToRead");
-        expect(shelf).toHaveTextContent(/mock book 2/!)
-        setTimeout(() => expect(shelf).toHaveTextContent(/mock book 4/!) ,3000)
+        await waitFor(() => {
+          expect(shelf).toHaveTextContent(/mock book 2/!)
+          expect(shelf).toHaveTextContent(/mock book 4/!)
+        });
     } )
     it("removes from the old shelf", async ()=> {
         render(<MockedBookListing></MockedBookListing>);
@@ -140,7 +141,7 @@ describe("interacting with changing shelfs", () => {
         
         const shelf = await screen.findByTestId("shelfbooks-currentlyReading");
         expect(shelf).toHaveTextContent(/mock book 1/!)
-        setTimeout(() => expect(shelf).toHaveTextContent(/mock book 2/!) ,3000)
+        await waitFor(() => expect(shelf).toHaveTextContent(/mock book 2/!))
     } )
     it("removes a lonely book from the old shelf to leave it empty", async ()=> {
         render(<MockedBookListing></MockedBookListing>);
@@ -156,10 +157,10 @@ describe("interacting with changing shelfs", () => {
         fireEvent.change(bookSelectMenu, {target:{ value:"none"}});
         
         const shelf = await screen.findByTestId("shelfbooks-read");
-        setTimeout(() =>{
+        await waitFor(() =>{
             expect(shelf).not.toHaveTextContent(/mock book 3/!)
             expect(shelf).toHaveTextContent(/mock book 4/!)
-        }  ,3000)
+        })
         
     })
 })
