@@ -1,11 +1,10 @@
 import "./App.css";
-import BookListing from "./components/BookListing";
+import BookListing from "./pages/BookListing";
 import SearchBooks from "./pages/SearchBooks";
 import { Route, Routes } from "react-router-dom";
 
 
 function App() {
-  // const [showSearchPage, setShowSearchpage] = useState(false);
 
   return (
     <div className="app">

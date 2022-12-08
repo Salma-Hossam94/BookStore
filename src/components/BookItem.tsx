@@ -1,13 +1,11 @@
 import Book from "../DataModels/Book";
-//import {useDrag} from "react-dnd";
 import { ChangeEvent} from "react"
 import { bookActions } from "../store/bookStore";
 import { update } from "../BooksAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const BookItem: React.FC<{book: Book}> = (props) => {
-  //const books = useSelector((state: any) => state.bookStore.books);
    const dispatch = useDispatch();
 
   const changeShelfHandler = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -16,17 +14,6 @@ const BookItem: React.FC<{book: Book}> = (props) => {
     });
   }
 
-  // const [{ isDragging }, dragRef] = useDrag(
-  //   () => ({
-  //     type: "book",
-  //     //item: { text },
-  //     collect: (monitor) => ({
-  //       isDragging: !!monitor.isDragging(),
-  //     })
-  //   }),
-  //   []
-  // )
-  // ref={dragRef}
   return (
     <li id={props.book.title} data-testid="books">
       <div className="book">
