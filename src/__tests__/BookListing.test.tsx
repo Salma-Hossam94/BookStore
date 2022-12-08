@@ -3,7 +3,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Book from "../DataModels/Book";
 import store from "../store/store";
-import BookListing from "../components/BookListing";
+import BookListing from "../pages/BookListing";
+import { act } from "react-dom/test-utils";
 
 const MockedBookListing: React.FC = (props) => {
   return (
@@ -140,7 +141,7 @@ describe("interacting with changing shelfs", () => {
         fireEvent.change(bookSelectMenu, {target:{ value:"currentlyReading"}});
         
         const shelf = await screen.findByTestId("shelfbooks-currentlyReading");
-        expect(shelf).toHaveTextContent(/mock book 1/!)
+        expect(shelf).toHaveTextContent(/mock book 1/!);
         await waitFor(() => expect(shelf).toHaveTextContent(/mock book 2/!))
     } )
     it("removes a lonely book from the old shelf to leave it empty", async ()=> {

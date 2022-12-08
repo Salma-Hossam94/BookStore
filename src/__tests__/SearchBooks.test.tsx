@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Book from "../DataModels/Book";
 import store from "../store/store";
-import SearchBooks from "../components/SearchBooks";
+import SearchBooks from "../pages/SearchBooks";
 
 const MockedSearchBooks: React.FC = (props) => {
   return (

@@ -1,6 +1,6 @@
 import "./App.css";
 import BookListing from "./components/BookListing";
-import SearchBooks from "./components/SearchBooks";
+import SearchBooks from "./pages/SearchBooks";
 import { Route, Routes } from "react-router-dom";
 
 

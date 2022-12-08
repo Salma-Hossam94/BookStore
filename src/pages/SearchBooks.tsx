@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { search } from "../BooksAPI";
 import Book from "../DataModels/Book";
-import BookItem from "./BookItem";
+import BookItem from "../components/BookItem";
 
 const SearchBooks: React.FC = () => {
   const [books, setfilteredbooks] = useState<Book[]>([]);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAll } from "../BooksAPI";
 import Book from "../DataModels/Book";
-import Bookshelf from "./BookShelf";
+import Bookshelf from "../components/BookShelf";
 import { useSelector, useDispatch } from "react-redux";
 import { bookActions } from "../store/bookStore";
 
